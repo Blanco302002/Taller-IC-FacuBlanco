@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    name: Build, test y analisis
+    runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Sonar necesita historial completo para el blame/nuevas lineas
+          fetch-depth: 0
+
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Compilar y correr tests (con cobertura)
+        run: mvn -B clean verify
+
+      # El analisis Sonar se ejecuta solo si cargaste el secret SONAR_TOKEN.
+      # Mientras no este, este paso se saltea y el pipeline queda verde.
+      - name: Analisis SonarCloud
+        if: ${{ env.SONAR_TOKEN != '' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -Dsonar.token=$SONAR_TOKEN
