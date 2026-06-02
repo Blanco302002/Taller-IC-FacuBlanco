@@ -22,13 +22,21 @@
         <!-- Subimos Testcontainers por encima del que trae Spring Boot,
              para compatibilidad con versiones modernas del Docker Engine -->
         <testcontainers.version>1.20.6</testcontainers.version>
-        <!-- SonarCloud: completar con tus datos cuando crees el proyecto -->
-        <sonar.organization>TU_ORGANIZACION</sonar.organization>
-        <sonar.projectKey>TU_PROJECT_KEY</sonar.projectKey>
+        <!-- SonarCloud. Verificá estas keys en la página del proyecto en
+             sonarcloud.io (sección "Information"); ajustalas si difieren. -->
+        <sonar.organization>blanco302002</sonar.organization>
+        <sonar.projectKey>Blanco302002_Taller-IC-FacuBlanco</sonar.projectKey>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <!-- Ruta del reporte de cobertura que genera JaCoCo (lo lee Sonar) -->
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <dependencies>
+        <!-- API REST (controllers, Tomcat embebido, Jackson) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!-- Capa de datos (JPA / Hibernate) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

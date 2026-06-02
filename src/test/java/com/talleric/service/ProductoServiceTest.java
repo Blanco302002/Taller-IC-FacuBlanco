@@ -14,9 +14,8 @@ import com.talleric.repository.ProductoRepository;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
-/**
- * Tests unitarios de la logica de negocio: NO tocan la base de datos
- * (el repositorio es un mock). Corren rapidisimo en cada build.
+/*
+    Tests unitarios de la logica de negocio: NO tocan la base de datos
  */
 class ProductoServiceTest {
 

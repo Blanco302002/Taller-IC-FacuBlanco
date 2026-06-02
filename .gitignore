@@ -13,3 +13,6 @@ target/
 # Sistema
 .DS_Store
 Thumbs.db
+
+# Variables de entorno / secretos (NUNCA subir credenciales)
+.env

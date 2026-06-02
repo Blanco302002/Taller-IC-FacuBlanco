@@ -1,0 +1,30 @@
+/* ===== Componente: Contact ===== */
+.contact {
+  background: var(--bg-soft);
+  border-top: 1px solid var(--border);
+  padding: 72px 0 48px;
+}
+.contact__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.contact__card {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px;
+  color: var(--text); transition: border-color .2s, transform .2s;
+}
+.contact__card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.contact__ico {
+  width: 42px; height: 42px; flex: none;
+  display: grid; place-items: center;
+  font-size: 1.1rem; font-weight: 700; border-radius: 10px;
+  background: rgba(109, 179, 63, .12);
+  border: 1px solid rgba(109, 179, 63, .3);
+  color: var(--accent);
+}
+.contact__meta { display: flex; flex-direction: column; }
+.contact__label { font-size: .78rem; color: var(--text-dim); }
+.contact__valor { font-weight: 600; font-size: .95rem; }
+.contact__copy { margin-top: 36px; text-align: center; color: var(--text-dim); font-size: .85rem; }

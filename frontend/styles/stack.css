@@ -1,0 +1,29 @@
+/* ===== Componente: Stack (tarjetas por categoría) ===== */
+.stack { background: var(--bg-soft); }
+.stack__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+.stack__cat {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  transition: border-color .2s, transform .2s;
+}
+.stack__cat:hover { border-color: var(--accent); transform: translateY(-3px); }
+.stack__head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.stack__ico {
+  width: 40px; height: 40px; flex: none;
+  display: grid; place-items: center;
+  font-size: 1.25rem; border-radius: 10px;
+  background: rgba(109, 179, 63, .12);
+  border: 1px solid rgba(109, 179, 63, .3);
+}
+.stack__cat-name { font-size: 1.05rem; font-weight: 700; }
+.stack__items { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.stack__item { display: flex; align-items: baseline; gap: 10px; }
+.stack__pip { width: 7px; height: 7px; flex: none; border-radius: 50%; background: var(--accent); transform: translateY(-2px); }
+.stack__tech { font-weight: 600; font-size: .95rem; }
+.stack__ver { color: var(--text-dim); font-size: .8rem; margin-left: auto; }
