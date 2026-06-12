@@ -1,35 +1,29 @@
 // =====================================================================
 //  Capa de datos + validaciones
 //  ---------------------------------------------------------------------
-//  Consume la API REST de Spring Boot (ProductoController).
-//  En local el backend corre en http://localhost:8080.
-//  Al deployar, cambiá API_BASE por la URL pública del backend.
+//  Demo standalone: guarda los productos en localStorage del navegador,
+//  así funciona sin backend (ideal para el deploy estático en Vercel).
+//  El backend REST de Spring Boot vive en la rama `development`; para
+//  conectarlo, se reemplaza esta capa por llamados fetch a la API.
 // =====================================================================
-const API_BASE = "http://localhost:8080/api/productos";
+const STORAGE_KEY = "taller-ic-productos";
 
 export const api = {
   async listar() {
-    const r = await fetch(API_BASE);
-    if (!r.ok) throw new Error("No se pudieron cargar los productos");
-    return await r.json();
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
   },
 
   async agregar(producto) {
-    const r = await fetch(API_BASE, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(producto),
-    });
-    if (!r.ok) {
-      const data = await r.json().catch(() => ({}));
-      throw new Error(data.message || "No se pudo agregar el producto");
-    }
-    return await r.json();
+    const items = await this.listar();
+    producto.id = Date.now();
+    items.push(producto);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    return producto;
   },
 
   async eliminar(id) {
-    const r = await fetch(`${API_BASE}/${id}`, { method: "DELETE" });
-    if (!r.ok) throw new Error("No se pudo eliminar el producto");
+    const items = (await this.listar()).filter((p) => p.id !== id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   },
 };
 

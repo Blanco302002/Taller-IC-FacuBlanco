@@ -17,7 +17,7 @@ export function Demo() {
   el.innerHTML = `
     <div class="container">
       <h2>Demo · CRUD de Productos</h2>
-      <p class="sub">Probá las operaciones en vivo contra la API REST de Spring Boot.</p>
+      <p class="sub">Probá las operaciones del CRUD en vivo. Reproduce las validaciones del <code>ProductoService</code>.</p>
       <div class="demo__wrap">
         <div class="panel">
           <h3>Agregar producto</h3>
@@ -76,18 +76,10 @@ export function Demo() {
   };
 
   async function render() {
-    let items;
-    try {
-      items = await api.listar();
-    } catch (err) {
-      empty.style.display = "block";
-      empty.textContent = "⚠ No se pudo conectar con la API. ¿Está corriendo el backend?";
-      return;
-    }
+    const items = await api.listar();
 
     tbody.innerHTML = "";
     empty.style.display = items.length ? "none" : "block";
-    empty.textContent = "Todavía no hay productos. ¡Agregá el primero! 👈";
 
     let totalStock = 0;
     let totalValue = 0;
